@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <!-- CSS Imports -->
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/leaflet.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <link href='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.css' rel='stylesheet' />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- Start Page -->
+    <div class="bg">
+      <img id="front" src="start-bg.png" width="100%" height="100%"/>
+      <h1 id="start-text">DUNKIN' DONUTS IN PHILLY</h1>
+      <button class="start-button" id="start"><span>START </span></button>
+    </div>
+    <!-- Navigation Sidebar -->
+    <div class="navsidebar" hidden="hidden">
+      <!-- logo -->
+      <div class="blank"></div>
+      <div id="logo-container">
+        <img id="logo" src="dunkin-donuts-logo-black-and-white.png" width="165" height="70"/>
+      </div>
+      <div class="blank"></div>
+      <!-- navigation choices -->
+      <div class="nav-bars">
+        <ul class="nav nav-pills nav-stacked">
+          <li role="presentation" id="maps"><a href="#">
+              <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+              Maps</a>
+          </li>
+          <li role="presentation" id="info"><a href="#">
+              <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+              Information</a>
+          </li>
+          <li role="presentation" id="filter"><a href="#">
+              <span class="glyphicon glyphicon glyphicon-filter" aria-hidden="true"></span>
+              Filter</a>
+          </li>
+          <li role="presentation" id="route"><a href="#">
+              <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
+              Route</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- Interaction Sidebar -->
+    <div class="intsidebar" hidden="hidden">
+      <!-- maps -->
+      <div class="subdiv" id="maps-page" hidden="hidden">
+        <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" id="hideit1" style="font-size:20px; color:rgba(255, 255, 255, 0.7); float:right"></span>
+        <div class="barTitle">
+          <h3 style="color:rgba(255, 255, 255, 0.8); vertical-align:middle;margin-bottom:5px; margin-left:20px; margin-right:20px; margin-top: 40px">Select a map</h3>
+        </div>
+        <ul class="nav nav-pills nav-stacked" id="mapsChoice" style="margin-top: 20px">
+          <li role="presentation" id="mapsChoice1" style="margin-bottom:5px; margin-left:20px; margin-right:20px"><a href="#">Sales Volume</a></li>
+          <li role="presentation" id="mapsChoice2" style="margin-bottom:5px; margin-left:20px; margin-right:20px"><a href="#">Number of Employees</a></li>
+        </ul>
+      </div>
+      <!-- info -->
+      <div clas="subdiv" id="info-page" style="margin-bottom:15px" hidden="hidden">
+        <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" id="hideit2" style="font-size:20px; color:rgba(255, 255, 255, 0.7); float:right"></span>
+        <div class="barTitle">
+          <h3 style="color:rgba(255, 255, 255, 0.8); vertical-align:middle;margin-bottom:5px; margin-left:20px; margin-right:20px; margin-top: 40px">Individual Store Info</h3>
+        </div>
+        <h5 class="info-subtitle">Business Stats</h5>
+        <div class="input-group">
+          <input id="store_id" type="text"
+                 class="form-control"
+                 placeholder="Store ID"
+                 disabled>
+          <input id="address" type="text"
+                 class="form-control"
+                 placeholder="Address"
+                 disabled>
+          <input id="zipcode" type="text"
+                 class="form-control"
+                 placeholder="Zipcode"
+                 disabled>
+         <input id="salesvol" type="text"
+                class="form-control"
+                placeholder="Sales Volume"
+                disabled>
+         <input id="employees" type="text"
+                class="form-control"
+                placeholder="Number of Employees"
+                disabled>
+        </div>
+        <h5 class="info-subtitle">Demographic Stats</h5>
+        <div class="input-group">
+          <input id="population" type="text"
+                 class="form-control"
+                 placeholder="Population"
+                 disabled>
+          <input id="households" type="text"
+                 class="form-control"
+                 placeholder="Households"
+                 disabled>
+          <input id="income" type="text"
+                 class="form-control"
+                 placeholder="Median Income"
+                 disabled>
+          <input id="housevalue" type="text"
+                 class="form-control"
+                 placeholder="Median House Value"
+                 disabled>
+          <input id="pctwhite" type="text"
+                 class="form-control"
+                 placeholder="Percent White"
+                 disabled>
+          <input id="pctcollege" type="text"
+                 class="form-control"
+                 placeholder="Percent College Degree"
+                 disabled>
+        </div>
+        <h5 class="info-subtitle">Proximity to Facilities</h5>
+        <div class="input-group">
+          <input id="dhighway" type="text"
+                 class="form-control"
+                 placeholder="Distance to Highway"
+                 disabled>
+          <input id="dshop" type="text"
+                 class="form-control"
+                 placeholder="Distance to Shopping Center"
+                 disabled>
+          <input id="demploy" type="text"
+                 class="form-control"
+                 placeholder="Distance to Employment Center"
+                 disabled>
+        </div>
+      </div>
+      <!-- filter -->
+      <div class="subdiv" id="filter-page" hidden="hidden">
+        <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" id="hideit3" style="font-size:20px; color:rgba(255, 255, 255, 0.7); float:right"></span>
+        <div class="barTitle">
+          <h3 style="color:rgba(255, 255, 255, 0.8); vertical-align:middle;margin-bottom:5px; margin-left:20px; margin-right:20px; margin-top: 40px">Filter by Your Choice</h3>
+        </div>
+        <!-- two categories of filter -->
+        <div class="filter-choice" id="filter-choice1" style="color:rgba(255, 255, 255, 0.8);margin-left:50px">
+          <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true" style="font-size:40px"></span>
+          Sales Volume
+        </div>
+        <div class="filter-choice" id="filter-choice2" style="color:rgba(255, 255, 255, 0.8);margin-left:5px">
+          <span class="glyphicon glyphicon-user" aria-hidden="true" style="font-size:40px"></span>
+          Employees Number
+        </div>
+        <!-- above or below average -->
+        <div id="filter-expand1" class="filter-expand" hidden="hidden">
+          <ul class="nav nav-pills nav-stacked">
+            <li role="presentation" id="filter-choice1-above" style="margin-bottom:5px; margin-top:10px"><a href="#">Above Average</a></li>
+            <li role="presentation" id="filter-choice1-below" style="margin-bottom:5px; "><a href="#">Below Average</a></li>
+            <li role="presentation" id="filter-choice1-custom" style="margin-bottom:5px; "><a href="#">Custom Range</a></li>
+          </ul>
+        </div>
+        <div id="filter-expand2" class="filter-expand" hidden="hidden">
+          <ul class="nav nav-pills nav-stacked">
+            <li role="presentation" id="filter-choice2-above" style="margin-bottom:5px; margin-top:10px"><a href="#">Above Average</a></li>
+            <li role="presentation" id="filter-choice2-below" style="margin-bottom:5px; "><a href="#">Below Average</a></li>
+            <li role="presentation" id="filter-choice2-custom" style="margin-bottom:5px; "><a href="#">Custom Range</a></li>
+          </ul>
+        </div>
+        <!-- custom range -->
+        <div id="filter-custom1" class="filter-custom" hidden = "hidden">
+           <h5>From</h5>
+           <input id="low_salesvol" type="number"
+                  class="form-control"
+                  placeholder="Min:112" style="color:black">
+           <h5>To</h5>
+           <input id="high_salesovol" type="number"
+                  class="form-control"
+                  placeholder="Max: 1960" style="color:black">
+        </div>
+        <div id="filter-custom2" class="filter-custom" hidden = "hidden">
+           <h5>From</h5>
+           <input id="low_emp" type="number"
+                  class="form-control"
+                  placeholder="Min:2" style="color:black">
+           <h5>To</h5>
+           <input id="high_emp" type="number"
+                  class="form-control"
+                  placeholder="Max: 35" style="color:black">
+        </div>
+        <!-- filter submit button -->
+        <div class="generateButton" id="generateButton-filter" hidden="hidden">
+          <button class="button" id="filter-go">Filter</button>
+          <button class="button" id="filter-clear">Clear</button>
+        </div>
+      </div>
+      <!-- route -->
+      <div class="subdiv" id="route-page" hidden="hidden">
+        <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" id="hideit4" style="font-size:20px; color:rgba(255, 255, 255, 0.7); float:right"></span>
+        <div class="barTitle">
+          <h3 style="color:rgba(255, 255, 255, 0.8); vertical-align:middle;margin-bottom:5px; margin-left:20px; margin-right:20px; margin-top: 40px">Find the route</h3>
+        </div>
+        <p id="route-direction">To find a route from your current location to a Dunkin' Donuts store,
+          search by store ID and then click "Go!".</p>
+        <p id="route-direction">To clear route, click "Clear". </p>
+        <div class="form-group">
+          <label for="usr" style="color:rgba(255, 255, 255, 0.8)">Destination (Store ID):</label>
+          <input type="text" class="form-control" id="usr">
+        </div>
+        <div class="generateButton" id="generateButton-route">
+          <button class="button" id="go">Go!</button>
+          <button class="button" id="clear">Clear</button>
+        </div>
+      </div>
+    </div>
+    <!-- Map -->
+    <div id="map" class="map" hidden="hidden"></div>
+    <!-- Javascript Imports -->
+    <script src="js/jquery-2.2.0.js"></script>
+    <script src="js/underscore.js"></script>
+    <script src="js/leaflet.js"></script>
+    <script src='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/@turf/turf@5/turf.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="js/decode.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/functions.js"></script>
+  </body>
+</html>
